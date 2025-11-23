@@ -1,0 +1,135 @@
+body {
+  background: #000;
+  color: #0aff0a;
+  font-family: "Courier New", monospace;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* CRT風ノイズ */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: repeating-linear-gradient(
+    rgba(0,255,0,0.05) 0px,
+    rgba(0,255,0,0.05) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+header {
+  padding: 3rem 1rem;
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 3px;
+  text-shadow: 0 0 8px #0aff0a;
+  animation: flicker 3s infinite alternate;
+}
+
+@keyframes flicker {
+  0%   {opacity: 1;}
+  50%  {opacity: 0.8;}
+  52%  {opacity: 1;}
+  55%  {opacity: 0.7;}
+  60%  {opacity: 1;}
+  100% {opacity: 0.9;}
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 2rem 4rem;
+}
+
+h2 {
+  border-left: 4px solid #0aff0a;
+  padding-left: 10px;
+  margin-top: 3rem;
+  text-shadow: 0 0 5px #0aff0a;
+}
+
+p {
+  line-height: 1.8;
+}
+.skills-two-axis {
+  display: flex;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+
+.axis {
+  flex: 1;
+}
+
+.axis h3 {
+  border-bottom: 1px solid #0aff0a;
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 4px #0aff0a;
+}
+
+.axis .skill {
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #0aff0a;
+  border-radius: 4px;
+  text-align: center;
+  text-shadow: 0 0 4px #0aff0a;
+  cursor: default;
+  transition: 0.2s;
+}
+
+.axis .skill:hover {
+  background: rgba(0,255,0,0.1);
+  box-shadow: 0 0 10px #0aff0a;
+}
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+/* 端に流れるコード風アニメ */
+.matrix {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.08;
+  font-size: 14px;
+  line-height: 14px;
+  white-space: pre;
+  animation: matrixScroll 8s linear infinite;
+}
+
+@keyframes matrixScroll {
+  from {transform: translateY(-100%);} 
+  to   {transform: translateY(100%);} 
+}
+
+/* Links (icons) */
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+
+.links a {
+  display: inline-block;
+}
+
+.link-icon {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 0 6px #0aff0a);
+}
