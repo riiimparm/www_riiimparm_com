@@ -1,6 +1,7 @@
 ---
 import { XMLParser } from "fast-xml-parser";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ogpImage from "../../assets/images/ogp.png";
 
 // RSSフィードのURL
 const RSS_URL = "https://www.rowicy.com/RiiiM/rss.xml";
@@ -48,7 +49,7 @@ function formatDate(date: Date): string {
 }
 ---
 
-<BaseLayout title="riiimparm / whoami……">
+<BaseLayout >
     <section>
     <h2>// Posts</h2>
 
