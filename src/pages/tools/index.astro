@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="riiimparm / whoami……">
+  <section>
+    <h2>// TOOLS</h2>
+
+    <div class="wip-box">
+      <span class="wip-title">Under Construction...</span>
+      <p class="wip-desc">
+        This page is currently under development.<br />
+        New tools will be released soon.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .wip-box {
+      border: 1px dashed #0aff0a;
+      padding: 2rem;
+      margin-top: 1.5rem;
+      background: rgba(10, 255, 10, 0.05);
+      text-align: center;
+    }
+
+    .wip-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #0aff0a;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .wip-desc {
+      color: #0aff0a;
+      opacity: 0.8;
+    }
+  </style>
+</BaseLayout>

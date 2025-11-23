@@ -1,0 +1,213 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { products } from "../../data/products";
+---
+
+<BaseLayout title="riiimparm / whoami……">
+  <section>
+    <h2>// PRODUCTS</h2>
+
+    <div class="product-list">
+      {products.map((p) => (
+        
+        <a class="product-card" href={p.url} target="_blank">
+          <div class="card-image">
+            <img src={p.image} alt={p.title} />
+          </div>
+          <div class="card-overlay">
+            <h3>| {p.title}</h3>
+            
+            {/* 技術スタックタグ */}
+            {p.techStack && p.techStack.length > 0 && (
+              <div class="tech-stack">
+                {p.techStack.map((tech) => (
+                  <span class="tech-tag">{tech}</span>
+                ))}
+              </div>
+            )}
+            
+            <p class="description">{p.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+  
+  <style>
+    /* ▼ グローバル links の影響を殺す */
+    .product-list a {
+      display: block !important;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1.8rem;
+    }
+
+    /* ▼ カード */
+    .product-card {
+      position: relative;
+      width: 80%;
+      margin: 0 auto;
+      aspect-ratio: 2 / 1;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    /* ▼ 背景画像 */
+    .card-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .card-image img {
+      transform: scale(1.1);
+    }
+
+    /* ▼ テキストオーバーレイ */
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.672) 0%,
+        rgba(0, 0, 0, 0.2) 25%,
+        rgba(0, 0, 0, 0.15) 50%,
+        rgba(0, 0, 0, 0.05) 70%,
+        transparent 100%
+      );
+    }
+
+    .card-overlay::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      backdrop-filter: blur(8px);
+      mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.7) 30%,
+        rgba(0, 0, 0, 0.3) 60%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.7) 30%,
+        rgba(0, 0, 0, 0.3) 60%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* ▼ タイトル */
+    h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #02a805;
+      text-shadow: 0 0 10px #7f7f7f;
+    }
+
+    /* ▼ 技術スタックタグ */
+    .tech-stack {
+      display: flex;
+      margin-left: 1rem;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .tech-tag {
+        display: inline-block;
+        padding: 0.25rem 0.7rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        font-family: 'FiraCode Nerd Font', 'JetBrainsMono Nerd Font', monospace;
+        color: #00c000; /* 少し明るめ緑で読みやすく */
+        background: rgba(0, 192, 0, 0.1); /* 半透明強め */
+        border: 1px solid #7f7f7f00;
+        border-radius: 8px; /* 角丸を大きめに */
+        text-shadow: 0 0 2px #7f7f7f;
+        backdrop-filter: blur(6px); /* 背景をふんわりぼかす */
+        transition: all 0.2s ease;
+    }
+
+
+
+    /* ▼ 説明文 */
+    .description {
+      margin-left: 1rem;
+      margin: 0 0 0 1rem;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #000;
+      max-width: 90%;
+      text-shadow: 0 0 5px #7f7f7f;
+      font-family: 'FiraCode Nerd Font', 'JetBrainsMono Nerd Font', monospace;
+    }
+
+    /* ▼ モバイル対応 */
+    @media (max-width: 640px) {
+      .product-card {
+        aspect-ratio: 3 / 2;
+      }
+
+      .card-overlay {
+        padding: 1rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      .tech-stack {
+        gap: 0.3rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .tech-tag {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.5rem;
+      }
+
+      .description {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</BaseLayout>

@@ -1,0 +1,169 @@
+---
+import { XMLParser } from "fast-xml-parser";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// RSSフィードのURL
+const RSS_URL = "https://www.rowicy.com/RiiiM/rss.xml";
+
+// RSSデータを取得してパース
+async function fetchBlogPosts() {
+    try {
+        const response = await fetch(RSS_URL);
+        const xmlText = await response.text();
+
+        // XMLをパース
+        const parser = new XMLParser();
+        const result = parser.parse(xmlText);
+
+        // 記事を取得
+        const items = result.rss.channel.item;
+        const itemsArray = Array.isArray(items) ? items : [items];
+
+        return (
+            itemsArray
+                .map((item) => ({
+                    title: item.title || "",
+                    link: item.link || "",
+                    description: item.description || "",
+                    pubDate: new Date(item.pubDate || ""),
+                }))
+                // 最新順にソート
+                .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime())
+        );
+    } catch (error) {
+        console.error("RSS取得エラー:", error);
+        return [];
+    }
+}
+
+const posts = await fetchBlogPosts();
+
+// 日付をフォーマット
+function formatDate(date: Date): string {
+    return date.toLocaleDateString("ja-JP", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    });
+}
+---
+
+<BaseLayout title="riiimparm / whoami……">
+    <section>
+    <h2>// Posts</h2>
+
+    {
+        posts.length === 0 ? (
+            <p>記事が見つかりませんでした。</p>
+        ) : (
+            <ul class="post-list">
+                {posts.map((post) => (
+                    <li class="post-item">
+                        <time class="post-date">
+                            {formatDate(post.pubDate)}
+                        </time>
+                        <h3 class="post-title">
+                            <a
+                                href={post.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {post.title}
+                            </a>
+                        </h3>
+                        <p class="post-description">{post.description}</p>
+                    </li>
+                ))}
+            </ul>
+        )
+    }
+    </section>
+</BaseLayout>
+
+<style>
+    .post-list {
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0;
+    }
+
+    .post-item {
+        margin-bottom: 2.5rem;
+        padding: 1.5rem;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .post-item::before {
+        content: "{";
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 1.5rem;
+        color: #0aff0a;
+        text-shadow: 0 0 5px #0aff0a;
+    }
+
+    .post-item::after {
+        content: "}";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: 1.5rem;
+        color: #0aff0a;
+        text-shadow: 0 0 5px #0aff0a;
+    }
+
+    .post-item:hover {
+        background: rgba(0, 255, 0, 0.05);
+    }
+
+    .post-item:hover::before,
+    .post-item:hover::after {
+        text-shadow: 0 0 10px #0aff0a;
+    }
+
+    .post-date {
+        display: block;
+        font-size: 0.85rem;
+        color: #0aff0a;
+        opacity: 0.7;
+        margin-bottom: 0.5rem;
+    }
+
+    .post-title {
+        margin: 0 0 0.8rem 0;
+        font-size: 1.3rem;
+        text-shadow: 0 0 1px #0aff0a;
+    }
+
+    .post-title a {
+        color: #0aff0a;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+    .post-title a:hover {
+        text-shadow: 0 0 10px #0aff0a;
+    }
+
+    .post-description {
+        margin: 0;
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+
+    @media (max-width: 640px) {
+        main {
+            padding: 1rem;
+        }
+
+        .post-item {
+            padding: 1rem;
+        }
+
+        .post-title {
+            font-size: 1.1rem;
+        }
+    }
+</style>

@@ -89,6 +89,13 @@ p {
   background: rgba(0,255,0,0.1);
   box-shadow: 0 0 10px #0aff0a;
 }
+
+a {
+  color: #0aff0a;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
 footer {
   text-align: center;
   padding: 2rem;
@@ -132,4 +139,44 @@ footer {
   width: 30px;
   height: 30px;
   filter: drop-shadow(0 0 6px #0aff0a);
+}
+
+.site-navigation {
+  margin: 2rem 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.nav-link {
+  color: #0aff0a;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px #0aff0a;
+}
+
+.nav-link::before {
+  content: '[ ';
+  color: #0aff0a;
+}
+
+.nav-link::after {
+  content: ' ]';
+  color: #0aff0a;
+}
+
+.nav-link:hover {
+  text-shadow: 0 0 10px #0aff0a;
+  letter-spacing: 2px;
+}
+
+.nav-link:hover::before,
+.nav-link:hover::after {
+  text-shadow: 0 0 10px #0aff0a;
 }

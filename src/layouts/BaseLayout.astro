@@ -1,0 +1,30 @@
+---
+import "../styles/global.css";
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+  </head>
+  <body>
+
+    <!-- 共通ヘッダー -->
+    <header>
+      >> riiimparm / whoami……
+    </header>
+
+    <!-- ページごとのコンテンツ -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- 共通フッター -->
+    <footer>
+      © 2025 riiimparm
+    </footer>
+
+  </body>
+</html>
