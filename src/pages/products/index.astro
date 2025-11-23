@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { products } from "../../data/products";
-import ogpImage from "../../assets/images/ogp.png";
 ---
 
 <BaseLayout >
@@ -18,7 +17,6 @@ import ogpImage from "../../assets/images/ogp.png";
           <div class="card-overlay">
             <h3>| {p.title}</h3>
             
-            {/* 技術スタックタグ */}
             {p.techStack && p.techStack.length > 0 && (
               <div class="tech-stack">
                 {p.techStack.map((tech) => (
@@ -35,7 +33,6 @@ import ogpImage from "../../assets/images/ogp.png";
   </section>
   
   <style>
-    /* ▼ グローバル links の影響を殺す */
     .product-list a {
       display: block !important;
       text-decoration: none;
@@ -49,7 +46,6 @@ import ogpImage from "../../assets/images/ogp.png";
       margin-top: 1.8rem;
     }
 
-    /* ▼ カード */
     .product-card {
       position: relative;
       width: 80%;
@@ -65,7 +61,7 @@ import ogpImage from "../../assets/images/ogp.png";
       box-shadow: 0 8px 24px rgba(0,0,0,0.5);
     }
 
-    /* ▼ 背景画像 */
+    
     .card-image {
       position: absolute;
       top: 0;
@@ -86,7 +82,7 @@ import ogpImage from "../../assets/images/ogp.png";
       transform: scale(1.1);
     }
 
-    /* ▼ テキストオーバーレイ */
+    
     .card-overlay {
       position: absolute;
       top: 0;
@@ -134,7 +130,7 @@ import ogpImage from "../../assets/images/ogp.png";
       z-index: -1;
     }
 
-    /* ▼ タイトル */
+    
     h3 {
       margin: 0 0 0.5rem 0;
       font-size: 1.4rem;
@@ -143,7 +139,7 @@ import ogpImage from "../../assets/images/ogp.png";
       text-shadow: 0 0 10px #7f7f7f;
     }
 
-    /* ▼ 技術スタックタグ */
+    
     .tech-stack {
       display: flex;
       margin-left: 1rem;
@@ -158,18 +154,18 @@ import ogpImage from "../../assets/images/ogp.png";
         font-size: 0.7rem;
         font-weight: 600;
         font-family: 'FiraCode Nerd Font', 'JetBrainsMono Nerd Font', monospace;
-        color: #00c000; /* 少し明るめ緑で読みやすく */
-        background: rgba(0, 192, 0, 0.1); /* 半透明強め */
+        color: #00c000; 
+        background: rgba(0, 192, 0, 0.1); 
         border: 1px solid #7f7f7f00;
-        border-radius: 8px; /* 角丸を大きめに */
+        border-radius: 8px; 
         text-shadow: 0 0 2px #7f7f7f;
-        backdrop-filter: blur(6px); /* 背景をふんわりぼかす */
+        backdrop-filter: blur(6px); 
         transition: all 0.2s ease;
     }
 
 
 
-    /* ▼ 説明文 */
+    
     .description {
       margin-left: 1rem;
       margin: 0 0 0 1rem;
@@ -182,7 +178,7 @@ import ogpImage from "../../assets/images/ogp.png";
       font-family: 'FiraCode Nerd Font', 'JetBrainsMono Nerd Font', monospace;
     }
 
-    /* ▼ モバイル対応 */
+    
     @media (max-width: 640px) {
       .product-card {
         aspect-ratio: 3 / 2;
