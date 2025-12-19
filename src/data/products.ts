@@ -36,5 +36,14 @@ export const products: ProductItem[] = [
     `,
         image: "/product/scanned_notify.webp",
         techStack: ["Kotlin", "Burp Suite API"]
-    }
+    },
+    {
+        title: "RANDOM TRIPPER",
+        url: "https://random-tripper.riiimparm.com/",
+        description: `
+      A site that sends users to random domains around the world.
+    `,
+        image: "https://random-tripper.riiimparm.com/thumbnail.png",
+        techStack: ["Astro","Cloudflare DNS"]
+    },
 ];
