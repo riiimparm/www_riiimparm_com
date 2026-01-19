@@ -37,7 +37,7 @@ export const siteData: SiteData = {
     { href: "/blogs/", label: "Blogs" },
     { href: "/tools/", label: "Tools" },
     { href: "/products/", label: "Products" },
-    { href: "/slides/", label: "Speaker Deck" }
+    { href: "/slides/", label: "Slides" }
   ],
   
   skills: [
