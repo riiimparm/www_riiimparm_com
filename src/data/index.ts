@@ -2,7 +2,6 @@
 export interface SiteData {
   matrixText: string;
   about: string;
-  hobby: string;
   navigation: NavigationLink[];
   skills: SkillCategory[];
   socialLinks: SocialLink[];
@@ -30,14 +29,15 @@ export const siteData: SiteData = {
 01000101 01010011 01010011 00101110 00101110 00101110`,
   
   about: `riiimparm
-セキュリティ, SRE, ツール開発を中心にしています. 活動グループ: Rowicy (https://rowicy.com)`,
-  
-  hobby: "Personal development, pen testing tool extensions, etc.",
+ツール開発とセキュリティのエンジニア
+このサイトでは個人的に作ったツールやブログ内容をまとめています`,
+
   
   navigation: [
     { href: "/blogs/", label: "Blogs" },
     { href: "/tools/", label: "Tools" },
-    { href: "/products/", label: "Products" }
+    { href: "/products/", label: "Products" },
+    { href: "/slides/", label: "Speaker Deck" }
   ],
   
   skills: [

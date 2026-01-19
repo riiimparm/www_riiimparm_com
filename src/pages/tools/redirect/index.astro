@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+<BaseLayout >
+  <div class="container">
+    <h1>Redirecting</h1>
+    <div class="spinner"></div>
+    <div class="countdown">
+      redirect in <span id="seconds"></span>s...
+    </div>
+  </div>
+
+  <script is:inline>
+    const params = new URLSearchParams(window.location.search);
+
+    const redirectUrl = params.get('redirect') || '/';
+    let seconds = Number(params.get('seconds')) || 5;
+
+    const secondsEl = document.getElementById('seconds');
+    secondsEl.textContent = seconds;
+
+    const timer = setInterval(() => {
+      seconds--;
+      secondsEl.textContent = seconds;
+
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = redirectUrl;
+      }
+    }, 1000);
+  </script>
+</BaseLayout>
