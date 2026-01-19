@@ -1,0 +1,21 @@
+// src/data/tools.ts
+export interface Tool {
+  id: string;
+  name: string;
+  description: string;
+  url: string;
+  category?: string;
+  icon?: string; // SVGマークアップを文字列として保存
+}
+
+export const tools: Tool[] = [
+  {
+    id: "redirect_relay",
+    name: "Redirect Relay",
+    description: "X秒後にサイトYにリダイレクトさせるだけ<br>?redirect={{URL}}&seconds={{SECONDS}}",
+    url: "https://riiimparm.github.io/redirect_relay/?redirect=https://riiimparm.com/tools/&seconds=5",
+    category: "Util Site",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="#000000" d="M6.789 20V9.385q0-2.25 1.567-3.818T12.173 4t3.818 1.567t1.567 3.817v4.989l2.08-2.08l.708.707l-3.288 3.288L13.769 13l.708-.708l2.08 2.081V9.385q0-1.823-1.28-3.104T12.173 5T9.069 6.28T7.79 9.386V20z"/></svg>`
+  },
+  
+];

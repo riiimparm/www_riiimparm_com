@@ -1,32 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ogpImage from "../assets/images/ogp.png";
+import { siteData } from "../data/index";
 ---
 
-<BaseLayout >
-
+<BaseLayout>
   <div class="matrix">
-    01001001 01000001 01001101 01010010 01001001 01001001 01001001 01001101
-    01010100 01001000 01011111 01000100 01000001 01010010 01001011 01001110
-    01000101 01010011 01010011 00101110 00101110 00101110
+    {siteData.matrixText}
   </div>
 
   <section>
     <h2>// ABOUT</h2>
-    <p>
-      I'm riiimparm.<br />
-      An engineer currently studying web, security, and low-level systems.<br />
-      On this domain, I plan to release experimental tools and share technical information.
-    </p>
+    <p set:html={siteData.about.replace(/\n/g, '<br />')} />
   </section>
 
   <section>
     <h2>// SITE NAVIGATION</h2>
     <div class="site-navigation" role="navigation" aria-label="site navigation">
       <div class="nav-links">
-        <a href="/blogs/" class="nav-link">Blogs</a>
-        <a href="/tools/" class="nav-link">Tools</a>
-        <a href="/products/" class="nav-link">Products</a>
+        {siteData.navigation.map((link) => (
+          <a href={link.href} class="nav-link">{link.label}</a>
+        ))}
       </div>
     </div>
   </section>
@@ -34,42 +27,30 @@ import ogpImage from "../assets/images/ogp.png";
   <section>
     <h2>// SKILLS</h2>
     <div class="skills-two-axis">
-      <div class="axis">
-        <h3>Development</h3>
-        <div class="skill">Python</div>
-        <div class="skill">Go</div>
-        <div class="skill">Rust</div>
-        <div class="skill">Kubernetes</div>
-        <div class="skill">Terraform</div>
-      </div>
-
-      <div class="axis">
-        <h3>Offensive Security</h3>
-        <div class="skill">Web Pentesting</div>
-        <div class="skill">Penetration Testing</div>
-        <div class="skill">Reverse Engineering</div>
-        <div class="skill">Vulnerability Research</div>
-      </div>
+      {siteData.skills.map((category) => (
+        <div class="axis">
+          <h3>{category.title}</h3>
+          {category.skills.map((skill) => (
+            <div class="skill">{skill}</div>
+          ))}
+        </div>
+      ))}
     </div>
   </section>
 
   <section>
     <h2>// HOBBY</h2>
-    <p>
-      Personal development, pen testing tool extensions, etc.
-    </p>
+    <p>{siteData.hobby}</p>
   </section>
 
   <section>
     <h2>// LINKS</h2>
     <div class="links" role="navigation" aria-label="social links">
-      <a href="https://github.com/riiimparm" target="_blank" rel="noopener noreferrer">
-        <img src="https://api.iconify.design/grommet-icons:github.svg?color=%230aff0a" alt="GitHub" class="link-icon" />
-      </a>
-      <a href="https://x.com/riiimparm" target="_blank" rel="noopener noreferrer">
-        <img src="https://api.iconify.design/grommet-icons:x.svg?color=%230aff0a" alt="X" class="link-icon" />
-      </a>
+      {siteData.socialLinks.map((link) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer">
+          <img src={link.iconUrl} alt={link.label} class="link-icon" />
+        </a>
+      ))}
     </div>
   </section>
-
 </BaseLayout>
