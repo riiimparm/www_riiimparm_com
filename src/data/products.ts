@@ -10,6 +10,15 @@ export interface ProductItem {
 
 export const products: ProductItem[] = [
     {
+        title: "BeforeTranslate",
+        url: "https://github.com/riiimparm/before-translate",
+        description: `
+      Chrome extension that adjusts the DOM to provide a natural translation while preserving the layout.
+    `,
+        image: "https://private-user-images.githubusercontent.com/98566465/509654354-418c566a-1746-48b4-9fb9-09f6ae72c70b.gif?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njg4ODQxNDEsIm5iZiI6MTc2ODg4Mzg0MSwicGF0aCI6Ii85ODU2NjQ2NS81MDk2NTQzNTQtNDE4YzU2NmEtMTc0Ni00OGI0LTlmYjktMDlmNmFlNzJjNzBiLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMjAlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTIwVDA0MzcyMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTE4NTNkNDlmY2Q5MWI1OTM5OGMxYWE1NjMxZjUzMzg4NzVmNWYyMjA1NWE1NWU0YmMwYWMyN2UyMDJjOTJiYTQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.K8QVTNRaHD0MrHBuGRn6zADAVqd_VNh-AsvQZ1U5v4E",
+        techStack: ["JavaScript", "Chrome Extension API"]
+    },
+    {
         title: "Meeats BoardGame&Kitchen",
         url: "https://meeats-bgk.com/",
         description: `
