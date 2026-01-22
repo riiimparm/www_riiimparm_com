@@ -1,12 +1,18 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 ---
-<BaseLayout >
+<BaseLayout>
   <div class="container">
     <h1>Redirecting</h1>
     <div class="spinner"></div>
+
     <div class="countdown">
       redirect in <span id="seconds"></span>s...
+    </div>
+
+    <div class="redirect-to">
+      Redirect to:
+      <a id="redirect-url" href="#" rel="nofollow noopener"></a>
     </div>
   </div>
 
@@ -17,7 +23,12 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
     let seconds = Number(params.get('seconds')) || 5;
 
     const secondsEl = document.getElementById('seconds');
+    const redirectEl = document.getElementById('redirect-url');
+
+    // 初期表示
     secondsEl.textContent = seconds;
+    redirectEl.textContent = redirectUrl;
+    redirectEl.href = redirectUrl;
 
     const timer = setInterval(() => {
       seconds--;
