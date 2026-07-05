@@ -18,6 +18,9 @@ const {
 } = Astro.props;
 
 const siteUrl = Astro.site;
+const START_YEAR = 2025;
+const currentYear = new Date().getFullYear();
+const copyrightYears = currentYear > START_YEAR ? `${START_YEAR}-${currentYear}` : `${START_YEAR}`;
 if (!siteUrl) {
   console.warn(
     "astro.config.mjs の 'site' オプションが設定されていません。絶対URLが生成できません。",
@@ -57,7 +60,12 @@ const twitterHandle = "@riiimparm";
     <title>{title}</title>
 
     <meta name="description" content={description} />
-    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Noto+Serif+JP:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -82,7 +90,12 @@ const twitterHandle = "@riiimparm";
   </head>
   <body>
     
-    <a href="/"><header>>> riiimparm / whoami……</header></a>
+    <a href="/">
+      <header>
+        <span class="masthead">riiimparm</span>
+        <span class="masthead-sub">whoami……</span>
+      </header>
+    </a>
 
     
     <main>
@@ -90,6 +103,6 @@ const twitterHandle = "@riiimparm";
     </main>
 
     
-    <footer>© 2025 riiimparm</footer>
+    <footer>© {copyrightYears} riiimparm</footer>
   </body>
 </html>

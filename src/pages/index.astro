@@ -4,17 +4,13 @@ import { siteData } from "../data/index";
 ---
 
 <BaseLayout>
-  <div class="matrix">
-    {siteData.matrixText}
-  </div>
-
   <section>
-    <h2>// ABOUT</h2>
+    <h2>ABOUT</h2>
     <p set:html={siteData.about.replace(/\n/g, '<br />')} />
   </section>
 
   <section>
-    <h2>// SITE NAVIGATION</h2>
+    <h2>SITE NAVIGATION</h2>
     <div class="site-navigation" role="navigation" aria-label="site navigation">
       <div class="nav-links">
         {siteData.navigation.map((link) => (
@@ -25,22 +21,7 @@ import { siteData } from "../data/index";
   </section>
 
   <section>
-    <h2>// SKILLS</h2>
-    <div class="skills-two-axis">
-      {siteData.skills.map((category) => (
-        <div class="axis">
-          <h3>{category.title}</h3>
-          {category.skills.map((skill) => (
-            <div class="skill">{skill}</div>
-          ))}
-        </div>
-      ))}
-    </div>
-  </section>
-
-
-  <section>
-    <h2>// LINKS</h2>
+    <h2>LINKS</h2>
     <div class="links" role="navigation" aria-label="social links">
       {siteData.socialLinks.map((link) => (
         <a href={link.href} target="_blank" rel="noopener noreferrer">
