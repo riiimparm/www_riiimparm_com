@@ -1,160 +1,56 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { tools } from "../../data/tools";
+import { getTools } from "../../lib/tools";
+
+const tools = await getTools();
 ---
 
 <BaseLayout>
   <section>
     <h2>TOOLS</h2>
 
-    <div class="tools-grid">
+    <ul class="tools-list">
       {tools.map((tool) => (
-        <div class="tool-item" data-tool-id={tool.id}>
-          <div class="tool-header">
-            <div class="tool-title-wrapper">
-              {tool.icon && (
-                <span class="tool-icon" set:html={tool.icon} />
-              )}
-              <h3 class="tool-name">{tool.name}</h3>
-            </div>
-            {tool.category && <span class="tool-category">{tool.category}</span>}
-          </div>
-          <a 
-            href={tool.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="tool-link"
-          >
-            Visit Tool →
-          </a>
-          <div class="tool-description">
-            <p>{tool.description}</p>
-          </div>
-        </div>
+        <li>
+          <a href={`/tools/${tool.slug}/`}>{tool.title}</a>
+          {tool.description && (
+            <p class="tool-description">{tool.description}</p>
+          )}
+        </li>
       ))}
-    </div>
+    </ul>
   </section>
 
   <style>
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .tool-item {
-      border: 1px solid var(--accent);
-      padding: 1.5rem;
-      background: rgba(var(--accent-rgb), 0.03);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .tool-item:hover {
-      background: rgba(var(--accent-rgb), 0.08);
-      border-color: var(--accent);
-      box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.15);
-    }
-
-    .tool-item.active .tool-description {
-      max-height: 300px;
-      opacity: 1;
-      margin-top: 1rem;
-    }
-
-    .tool-header {
+    .tools-list {
+      list-style: none;
+      margin: 1.5rem 0 0;
+      padding: 0;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
+      flex-direction: column;
+      gap: 0.75rem;
     }
 
-    .tool-title-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex: 1;
-    }
-
-    .tool-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--accent);
-    }
-
-    .tool-icon :global(svg) {
-      width: 24px;
-      height: 24px;
-      stroke: currentColor;
-    }
-
-    .tool-name {
-      font-size: 1.25rem;
-      font-weight: bold;
-      color: var(--accent);
-      margin: 0;
-      flex: 1;
-    }
-
-    .tool-category {
-      font-size: 0.75rem;
-      color: var(--accent);
-      opacity: 0.7;
-      padding: 0.25rem 0.5rem;
-      border: 1px solid rgba(var(--accent-rgb), 0.3);
-      white-space: nowrap;
-    }
-
-    .tool-link {
-      color: var(--accent);
+    .tools-list a {
+      color: var(--fg);
       text-decoration: none;
-      font-size: 0.9rem;
-      display: inline-block;
-      transition: opacity 0.2s;
+      font-size: 1rem;
+      text-shadow: 0 0 0 transparent;
+      transition: color 0.6s ease 0.15s, text-shadow 0.6s ease 0.15s;
     }
 
-    .tool-link:hover {
-      opacity: 0.7;
+    .tools-list a:hover {
+      color: var(--accent);
       text-decoration: underline;
+      text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5);
     }
 
     .tool-description {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: all 0.3s ease;
+      margin: 0.2rem 0 0;
       color: var(--fg);
-      font-size: 0.9rem;
+      opacity: 0.7;
+      font-size: 0.85rem;
       line-height: 1.6;
     }
-
-    .tool-description p {
-      margin: 0;
-    }
   </style>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toolItems = document.querySelectorAll('.tool-item');
-      
-      toolItems.forEach((item) => {
-        item.addEventListener('click', (e) => {
-          const target = e.target as HTMLElement;
-          
-          // リンクをクリックした場合は展開/折りたたみを実行しない
-          if (target.tagName === 'A' || target.closest('a')) {
-            return;
-          }
-          
-          // 現在のアイテムをトグル
-          item.classList.toggle('active');
-        });
-      });
-    });
-  </script>
 </BaseLayout>

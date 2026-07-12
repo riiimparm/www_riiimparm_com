@@ -24,8 +24,9 @@ import { siteData } from "../data/index";
     <h2>LINKS</h2>
     <div class="links" role="navigation" aria-label="social links">
       {siteData.socialLinks.map((link) => (
-        <a href={link.href} target="_blank" rel="noopener noreferrer">
-          <img src={link.iconUrl} alt={link.label} class="link-icon" />
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src={link.iconUrl} alt={link.label} class="link-icon link-icon-base" />
+          <img src={link.iconUrlHover} alt="" aria-hidden="true" class="link-icon link-icon-hover" />
         </a>
       ))}
     </div>

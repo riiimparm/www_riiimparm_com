@@ -1,0 +1,53 @@
+---
+interface Props {
+  url: string;
+  title: string;
+}
+
+const { url, title } = Astro.props;
+
+let embeddedHtml: string | null = null;
+let error: string | null = null;
+
+try {
+  const res = await fetch(url);
+  if (!res.ok) {
+    error = `取得に失敗しました (HTTP ${res.status})`;
+  } else {
+    const raw = await res.text();
+
+    const headMatch = raw.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+    const bodyMatch = raw.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+
+    const styles = headMatch
+      ? [...headMatch[1].matchAll(/<style[^>]*>[\s\S]*?<\/style>/gi)].map((m) => m[0]).join("\n")
+      : "";
+    const body = bodyMatch ? bodyMatch[1] : raw;
+
+    embeddedHtml = `${styles}\n${body}`;
+  }
+} catch (e) {
+  error = e instanceof Error ? e.message : "取得に失敗しました";
+}
+---
+
+{embeddedHtml && <div class="remote-html-embed" data-embed-title={title} set:html={embeddedHtml} />}
+
+{error && (
+  <p class="remote-html-embed-error">
+    コンテンツの取得に失敗しました: {error} — <a href={url} target="_blank" rel="noopener noreferrer">元のファイルを開く</a>
+  </p>
+)}
+
+<style>
+  .remote-html-embed {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .remote-html-embed-error {
+    color: var(--fg);
+    opacity: 0.8;
+  }
+</style>

@@ -9,14 +9,14 @@ const BLOG_URL = "https://www.rowicy.com/blog/author/riiim/";
         <h2>Posts</h2>
         <p>
             ブログは外部サイトに移行しました。
-            自動的に移動しない場合は
-            <a href={BLOG_URL} rel="noopener noreferrer">こちら</a>
+            自動的に開かない場合は
+            <a href={BLOG_URL} target="_blank" rel="noopener noreferrer">こちら</a>
             をクリックしてください。
         </p>
     </section>
 
-    <meta http-equiv="refresh" content={`0;url=${BLOG_URL}`} />
     <script define:vars={{ BLOG_URL }}>
-        window.location.replace(BLOG_URL);
+        window.open(BLOG_URL, "_blank", "noopener,noreferrer");
+        window.location.replace("/");
     </script>
 </BaseLayout>
